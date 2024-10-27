@@ -1,0 +1,89 @@
+$primary-color: #8b57c6;
+$secondary-color: #191919;
+$text-color: #616e74;
+$background-color: #212123;
+$title-color: #f6f6f7;
+$button-color: #6c3eb8;
+
+.sidebar {
+  width: 300px;
+  background-color: $secondary-color;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-bottom: 30px;
+  margin-right: 20px;
+
+  .title {
+    background-color: $secondary-color;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
+    text-align: left;
+  }
+
+  nav {
+    background-color: $secondary-color;
+    flex-grow: 1;
+    margin-bottom: 100px;
+    width: 100%;
+
+    .menu {
+      list-style: none;
+      padding: 0;
+
+      li {
+        background-color: $secondary-color;
+        padding-bottom: 10px;
+
+        a {
+          background-color: $secondary-color;
+          text-decoration: none;
+          font-size: 1.1rem;
+          color: #555;
+          transition: color 0.3s ease;
+          text-align: left;
+          display: block;
+
+          &:hover {
+            color: $primary-color;
+          }
+
+          &.active {
+            color: $primary-color;
+            font-weight: bold;
+          }
+        }
+      }
+    }
+  }
+
+  .footer {
+    background-color: $secondary-color;
+    display: flex;
+    justify-content: space-between;
+
+    width: 100%;
+
+    .link {
+      background-color: $secondary-color;
+      padding-bottom: 10px;
+      font-size: 0.9rem;
+      color: #576067;
+      text-decoration: none;
+      transition: color 0.3s ease;
+
+      &:hover {
+        color: $primary-color;
+      }
+
+      &:last-child {
+        font-size: 0.85rem;
+        color: #576067;
+      }
+    }
+  }
+}

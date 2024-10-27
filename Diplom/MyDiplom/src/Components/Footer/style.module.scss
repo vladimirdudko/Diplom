@@ -1,0 +1,44 @@
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #191919;
+  color: #576067;
+
+  .logo {
+    img {
+      background-color: #191919;
+      width: 70px;
+    }
+  }
+
+  .rights {
+    p {
+      background-color: #191919;
+      font-size: 14px;
+      color: #576067;
+    }
+  }
+
+  .socials {
+    display: flex;
+    gap: 15px;
+    background-color: #191919;
+    .iconWrapper {
+      background-color: #191919;
+      padding: 10px;
+      border-radius: 50%;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    a {
+      color: #576067;
+      transition: color 0.3s ease;
+
+      &:hover {
+        color: #ff0000;
+      }
+    }
+  }
+}

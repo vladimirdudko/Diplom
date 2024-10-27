@@ -1,8 +1,14 @@
-/* CSS Reset */
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap");
+
+body {
+  font-family: "Montserrat", sans-serif;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  background-color: #212123;
 }
 
 html,
@@ -12,7 +18,7 @@ body {
 
 body {
   line-height: 1;
-  font-family: sans-serif;
+  font-family: "Montserrat", sans-serif;
 }
 
 ul,
