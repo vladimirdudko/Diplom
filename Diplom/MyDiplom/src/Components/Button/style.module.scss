@@ -1,0 +1,22 @@
+$button-color: #6c3eb8;
+$primary-color: #8b57c6;
+
+.button {
+  padding: 0.5em 1em;
+  border-radius: 4px;
+  font-size: 1em;
+  cursor: pointer;
+  background-color: #6c3eb8;
+  transition: background-color 0.3s, border-color 0.3s;
+  border: 1px solid transparent;
+  display: inline-block;
+  text-align: center;
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+  &:hover {
+    background-color: $primary-color;
+  }
+}

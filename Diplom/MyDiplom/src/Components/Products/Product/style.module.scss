@@ -1,0 +1,166 @@
+$primary-color: #8b57c6;
+$secondary-color: #191919;
+$text-color: #616e74;
+$background-color: #212123;
+$title-color: #f6f6f7;
+$button-color: #6c3eb8;
+
+.product {
+  display: flex;
+  width: 900px;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
+  margin-bottom: 30px;
+  background-color: $secondary-color;
+
+  .image {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    .current {
+      width: 100%;
+      height: 310px;
+      background-size: cover;
+      background-position: center;
+      border-radius: 8px;
+    }
+
+    .image {
+      width: 60px;
+      height: 60px;
+      background-size: cover;
+      background-position: center;
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: border-color 0.3s;
+
+      &:hover,
+      &.active {
+        border-color: #333;
+      }
+    }
+  }
+
+  .info {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background-color: $secondary-color;
+
+    .title {
+      font-size: 24px;
+      font-weight: bold;
+      background-color: $secondary-color;
+      color: $text-color;
+    }
+
+    .price {
+      font-size: 22px;
+      color: $primary-color;
+      font-weight: bold;
+      background-color: $secondary-color;
+    }
+
+    .color,
+    .sizes {
+      background-color: $secondary-color;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      font-size: 16px;
+      color: $text-color;
+
+      span {
+        background-color: $secondary-color;
+        font-weight: bold;
+      }
+    }
+
+    .sizes .list {
+      display: flex;
+      gap: 10px;
+
+      .size {
+        padding: 5px 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        cursor: pointer;
+        background-color: $secondary-color;
+        transition: background-color 0.3s, border-color 0.3s;
+
+        &:hover {
+          background-color: #f0f0f0;
+          border-color: #333;
+        }
+      }
+    }
+
+    .descr {
+      font-size: 14px;
+      color: #666;
+      line-height: 1.5;
+      background-color: $secondary-color;
+    }
+
+    .action {
+      display: flex;
+      gap: 10px;
+      justify-content: space-between;
+      background-color: $secondary-color;
+
+      .add,
+      .favorite {
+        padding: 10px 20px;
+        font-size: 16px;
+
+        border: none;
+        cursor: pointer;
+        border-radius: 8px;
+        transition: background-color 0.3s;
+      }
+
+      .add {
+        background-color: $button-color;
+        color: #fff;
+
+        &:hover {
+          background-color: $primary-color;
+        }
+      }
+
+      .favorite {
+        background-color: #ffc107;
+        color: #333;
+
+        &:hover {
+          background-color: #e0a800;
+        }
+      }
+    }
+
+    .bottom {
+      .purchase {
+        font-size: 14px;
+        color: #777;
+        background-color: $secondary-color;
+      }
+    }
+  }
+
+  a {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 14px;
+    text-decoration: underline;
+    color: $text-color;
+    background-color: $secondary-color;
+
+    &:hover {
+      color: $primary-color;
+    }
+  }
+}

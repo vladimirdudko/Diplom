@@ -1,0 +1,11 @@
+@import "variables";
+
+.app {
+  max-width: 1280px;
+  align-items: center;
+  background-color: $background-color;
+  .container {
+    display: flex;
+    justify-content: space-between;
+  }
+}
