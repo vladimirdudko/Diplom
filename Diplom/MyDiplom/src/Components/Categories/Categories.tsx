@@ -1,12 +1,14 @@
 import { FC } from "react";
-import styles from "./style.module.scss";
 import { Categories } from "../../shared/baseApi";
 import { Link } from "react-router-dom";
+import styles from "./style.module.scss";
+
 interface ICategories {
   title: string;
   categories: Categories[];
   amount: number;
 }
+
 const Categoriess: FC<ICategories> = ({ title, categories, amount }) => {
   const list = categories.filter((_, i) => i < amount);
 

@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
 import { ROUTES } from "../../utils/routes";
-import styles from "./style.module.scss";
-import LOGO from "../../image/logo.svg";
-import AVATAR from "../../image/avatar.svg";
 import SearchIcon from "@mui/icons-material/Search";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import styles from "./style.module.scss";
+import LOGO from "../../image/logo.svg";
+import AVATAR from "../../image/avatar.svg";
+
 const Header = () => {
   return (
     <div className={styles.header}>

@@ -25,6 +25,7 @@ const SoloProduct = () => {
     <div>
       {data ? (
         <Product
+          id={data.id}
           images={data.images}
           title={data.title}
           description={data.description}

@@ -5,7 +5,7 @@ export interface ButtonProps {
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
   type?: "button" | "submit" | "reset";
   className?: string;
-  disabled?: boolean; // Добавлено для поддержки отключенной кнопки
+  disabled?: boolean;
 }
 
 function Button({
@@ -19,8 +19,8 @@ function Button({
     <button
       type={type}
       onClick={onClick}
-      className={`${styles.button} ${className}`} // Объединяем классы
-      disabled={disabled} // Устанавливаем disabled состояние
+      className={`${styles.button} ${className}`}
+      disabled={disabled}
     >
       {children}
     </button>

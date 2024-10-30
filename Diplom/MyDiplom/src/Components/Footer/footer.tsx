@@ -1,13 +1,13 @@
 import { Link } from "react-router-dom";
-import styles from "./style.module.scss";
-import { ROUTES } from "../../utils/routes";
-import LOGO from "../../image/logo.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faYoutube,
   faFacebook,
   faTwitter,
 } from "@fortawesome/free-brands-svg-icons";
+import { ROUTES } from "../../utils/routes";
+import styles from "./style.module.scss";
+import LOGO from "../../image/logo.svg";
 
 const Footer = () => {
   return (

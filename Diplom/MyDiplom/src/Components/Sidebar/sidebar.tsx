@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
-import styles from "./style.module.scss";
 import { Categories, useGetCategoriesQuery } from "../../shared/baseApi";
+import styles from "./style.module.scss";
 
 const Sidebar = () => {
   const { data: categories, error, isLoading } = useGetCategoriesQuery();
