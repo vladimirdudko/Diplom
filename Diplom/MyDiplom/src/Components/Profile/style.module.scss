@@ -1,0 +1,50 @@
+$primary-color: #8b57c6;
+$secondary-color: #191919;
+$text-color: #616e74;
+$background-color: #212123;
+$title-color: #f6f6f7;
+
+.profile {
+  width: 900px;
+
+  padding: 20px;
+  margin-bottom: 30px;
+
+  background-color: $secondary-color;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  background-color: $secondary-color;
+}
+
+.group {
+  margin-bottom: 15px;
+}
+
+input {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.submit {
+  background-color: $primary-color;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.submit:hover {
+  background-color: #8d9bab;
+}

@@ -64,9 +64,44 @@
       top: 100%;
       left: 0;
       width: 100%;
-      background-color: #fff;
-      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-      padding: 10px;
+      gap: 20px;
+      display: block;
+      z-index: 222;
+      background-color: #99b0c8;
+      border-radius: 8px;
+
+      .linksearch {
+        text-decoration: none;
+        color: inherit;
+
+        border-radius: 8px;
+        overflow: hidden;
+        transition: transform 0.2s ease;
+        width: 200px;
+
+        &:hover {
+          transform: scale(1.05);
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .imageSearch {
+          border-radius: 8px;
+          width: 40px;
+          height: 40px;
+          background-size: cover;
+          background-position: center;
+        }
+
+        .titleSearch {
+          padding: 8px;
+          font-size: 14px;
+          font-weight: bold;
+          color: #333;
+          text-align: center;
+          background-color: #99b0c8;
+          border-radius: 8px;
+        }
+      }
     }
   }
 

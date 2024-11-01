@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { BASE_URL } from "../../utils/constants";
+import { buildUrl } from "../../utils/common";
 
 export interface Product {
   id: number;
@@ -15,6 +16,7 @@ export interface Categories {
   name: string;
   image?: string;
 }
+type GetProductParams = Record<string, string | number>;
 export const shopApi = createApi({
   reducerPath: "shopApi",
   baseQuery: fetchBaseQuery({ baseUrl: BASE_URL }),
@@ -37,6 +39,9 @@ export const shopApi = createApi({
         method: "GET",
       }),
     }),
+    getProduct: builder.query<Product[], GetProductParams>({
+      query: (params) => buildUrl(`/products`, params),
+    }),
   }),
 });
 
@@ -44,4 +49,5 @@ export const {
   useGetCategoriesQuery,
   useGetProductsQuery,
   useGetProductByIdQuery,
+  useGetProductQuery,
 } = shopApi;

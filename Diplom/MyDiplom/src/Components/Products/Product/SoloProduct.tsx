@@ -10,7 +10,7 @@ const SoloProduct = () => {
   const { data, isLoading, isFetching, isError } = useGetProductByIdQuery(
     Number(id)
   );
-
+  console.log(data);
   useEffect(() => {
     if (!isFetching && !isLoading && (isError || !data)) {
       navigate(ROUTES.HOME);

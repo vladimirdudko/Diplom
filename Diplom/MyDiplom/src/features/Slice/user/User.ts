@@ -2,19 +2,6 @@ import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
 import { BASE_URL } from "../../../utils/constants";
 
-// export const getCategories = createAsyncThunk(
-//     "categorise/getCategories",
-//     async(_, thunkAPI)=>{
-//         try{
-//             const res = await axios(`${BASE_URL}/categories`);
-//             return res.data;
-//         }catch (err){
-//             console.log(err);
-//             return thunkAPI.rejectWithValue(err)
-//         }
-//     }
-// )
-
 interface CartItem {
   id?: number;
   title: string;
@@ -23,31 +10,131 @@ interface CartItem {
   image: string;
   quantity: number;
 }
+interface User {
+  id?: number;
+  email?: string;
+  name?: string;
+  avatar?: string;
+}
+
+interface UserState {
+  currentUser: User | undefined;
+  cart: CartItem[];
+  isLoading: boolean;
+  formType: "signup" | "login";
+  showForm: boolean;
+}
+
+export const createUser = createAsyncThunk<User, User, { rejectValue: string }>(
+  "users/createUser",
+  async (payload, thunkAPI) => {
+    try {
+      const res = await axios.post(`${BASE_URL}/users`, payload);
+      return res.data;
+    } catch (err) {
+      console.log(err);
+      return thunkAPI.rejectWithValue("Failed to create user");
+    }
+  }
+);
+interface UpdateUser {
+  email: string;
+  name: string;
+}
+export const updateUser = createAsyncThunk<User, User, { rejectValue: string }>(
+  "users/updateUser",
+  async (payload, thunkAPI) => {
+    try {
+      const res = await axios.put(`${BASE_URL}/users/${payload.id}`, payload);
+      return res.data;
+    } catch (err) {
+      console.log(err);
+      return thunkAPI.rejectWithValue("Failed to update user");
+    }
+  }
+);
+
+interface UserLogin {
+  email?: string;
+  password?: string;
+}
+
+interface Token {
+  access_token: string;
+  refresh_token: string;
+}
+
+export const loginUser = createAsyncThunk<
+  UserLogin,
+  Token,
+  { rejectValue: string }
+>("users/loginUser", async (payload, thunkAPI) => {
+  try {
+    const res = await axios.post(`${BASE_URL}/auth/login/`, payload);
+
+    const login = await axios(`${BASE_URL}/auth/profile/`, {
+      headers: {
+        Authorization: `Bearer ${res.data.access_token}`,
+      },
+    });
+
+    return login.data;
+  } catch (err) {
+    console.log(err);
+    return thunkAPI.rejectWithValue("Failed to login user");
+  }
+});
+const initialState: UserState = {
+  currentUser: undefined,
+  cart: [],
+  isLoading: false,
+  formType: "signup",
+  showForm: false,
+};
 
 const userSlice = createSlice({
   name: "user",
-  initialState: {
-    currentUser: [],
-    cart: [] as CartItem[],
-    isLoading: false,
-  },
+  initialState,
   reducers: {
-    addItemToCart: (state, { payload }: { payload: CartItem }) => {
-      let newCart = [...state.cart];
-      const found = state.cart.find((item) => item.id === payload.id);
-      if (found) {
-        newCart = newCart.map((item) =>
-          item.id === payload.id
-            ? { ...item, quantity: item.quantity + 1 }
-            : item
-        );
+    addItemToCart: (state, action: PayloadAction<CartItem>) => {
+      const itemInCart = state.cart.find(
+        (item) => item.id === action.payload.id
+      );
+      if (itemInCart) {
+        itemInCart.quantity += 1;
       } else {
-        newCart.push(payload);
+        state.cart.push({ ...action.payload, quantity: 1 });
       }
-      state.cart = newCart;
     },
+    toggleForm: (state, action: PayloadAction<boolean>) => {
+      state.showForm = action.payload;
+    },
+    toggleFormType: (state, action: PayloadAction<"signup" | "login">) => {
+      state.formType = action.payload;
+    },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(createUser.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(createUser.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.currentUser = payload;
+      })
+      .addCase(loginUser.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.currentUser = payload;
+      })
+      .addCase(updateUser.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.currentUser = payload;
+      })
+      .addCase(createUser.rejected, (state) => {
+        state.isLoading = false;
+      });
   },
 });
 
-export const { addItemToCart } = userSlice.actions;
+export const { addItemToCart, toggleForm, toggleFormType } = userSlice.actions;
 export default userSlice.reducer;
