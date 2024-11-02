@@ -1,4 +1,9 @@
+import { FC, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { RootStateType } from "../../features/store";
+import { useGetProductQuery } from "../../shared/baseApi";
+import { toggleForm } from "../../features/Slice/user/User";
 import { ROUTES } from "../../utils/routes";
 import SearchIcon from "@mui/icons-material/Search";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
@@ -6,12 +11,6 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import styles from "./style.module.scss";
 import LOGO from "../../image/logo.svg";
 import AVATAR from "../../image/avatar.svg";
-import { useDispatch, useSelector } from "react-redux";
-import { RootStateType } from "../../features/store";
-import { toggleForm } from "../../features/Slice/user/User";
-import { FC, useEffect, useState } from "react";
-import { useGetProductQuery } from "../../shared/baseApi";
-import Product from "../Products/Product/Product";
 
 interface IProductSearch {
   title: string;
@@ -23,7 +22,9 @@ const Header: FC<IProductSearch> = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [values, setValues] = useState({ name: "Guest", avatar: AVATAR });
-  const { currentUser } = useSelector((state: RootStateType) => state.user);
+  const { currentUser, cart } = useSelector(
+    (state: RootStateType) => state.user
+  );
   const [search, setSearch] = useState<string>("");
   const { data, isLoading } = useGetProductQuery({ title: search });
 
@@ -103,7 +104,9 @@ const Header: FC<IProductSearch> = () => {
           </Link>
           <Link to={ROUTES.CART}>
             <ShoppingCartIcon color="secondary" />
-            <span className={styles.count}>2</span>
+            {!!cart.length && (
+              <span className={styles.count}>{cart.length}</span>
+            )}
           </Link>
         </div>
       </div>

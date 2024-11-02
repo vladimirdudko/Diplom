@@ -2,13 +2,14 @@ import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
 import { BASE_URL } from "../../../utils/constants";
 
-interface CartItem {
+export interface CartItem {
   id?: number;
   title: string;
   price: number;
   size: number;
   image: string;
   quantity: number;
+  category?: string;
 }
 interface User {
   id?: number;
@@ -37,10 +38,7 @@ export const createUser = createAsyncThunk<User, User, { rejectValue: string }>(
     }
   }
 );
-interface UpdateUser {
-  email: string;
-  name: string;
-}
+
 export const updateUser = createAsyncThunk<User, User, { rejectValue: string }>(
   "users/updateUser",
   async (payload, thunkAPI) => {
@@ -101,11 +99,17 @@ const userSlice = createSlice({
         (item) => item.id === action.payload.id
       );
       if (itemInCart) {
-        itemInCart.quantity += 1;
+        if (action.payload.quantity > 0) {
+          itemInCart.quantity = action.payload.quantity;
+        }
       } else {
         state.cart.push({ ...action.payload, quantity: 1 });
       }
     },
+    removeCartItem: (state, action: PayloadAction<number>) => {
+      state.cart = state.cart.filter((item) => item.id !== action.payload);
+    },
+
     toggleForm: (state, action: PayloadAction<boolean>) => {
       state.showForm = action.payload;
     },
@@ -136,5 +140,6 @@ const userSlice = createSlice({
   },
 });
 
-export const { addItemToCart, toggleForm, toggleFormType } = userSlice.actions;
+export const { addItemToCart, toggleForm, toggleFormType, removeCartItem } =
+  userSlice.actions;
 export default userSlice.reducer;
